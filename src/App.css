@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+p {
+  font-size: 2em;
+}
+
+button {
+  /*font-size: 1em;*/
+  margin-top: 20px;
+}
+
+button {
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+button:hover {
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  border: none;
+}
+
+button:focus {outline:0;}
