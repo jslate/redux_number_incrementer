@@ -20,7 +20,7 @@ const reducer = (state, action) => {
         number: state.number + action.incrementBy,
       };
     case CHANGE_INCREMENT_BY:
-      if (typeof(action.value) == 'undefined') {
+      if (typeof(action.value) === 'undefined') {
         return state;
       }
       return {
@@ -73,11 +73,15 @@ class NumberIncrementer extends React.Component {
 // anything else you want in it.  For one attempt at standardizing action
 // shapes, check out Flux Standard Action:
 // https://github.com/acdlite/flux-standard-action
-const incrementNumber = (incrementBy) => {
-  return { type: INCREMENT_NUMBER, incrementBy: incrementBy };
+const incrementNumber = () => {
+  return { type: INCREMENT_NUMBER, incrementBy: store.getState().incrementBy };
 
 };
-const changeIncrementBy = (value) => {
+const changeIncrementBy = (event) => {
+  const value = parseInt(event.target.value, 10);
+  if (isNaN(value)) {
+    return;
+  }
   return { type: CHANGE_INCREMENT_BY, value: value }
 };
 
@@ -96,15 +100,8 @@ const mapStateToProps = (state) => ({
 // we want to be able to dispatch an INCREMENT_NUMBER action when the
 // button gets clicked.
 const mapDispatchToProps = (dispatch) => ({
-  incrementNumber: () => {
-    dispatch(incrementNumber(store.getState().incrementBy)); },
-  changeIncrementBy: (event) => {
-    const value = parseInt(event.target.value, 10);
-    if (isNaN(value)) {
-      return;
-    }
-    dispatch(changeIncrementBy(value));
-  },
+  incrementNumber: () => dispatch(incrementNumber()),
+  changeIncrementBy: (event) => dispatch(changeIncrementBy(event)),
 });
 
 // Oh god, connect.  Connect is a function that takes one or more
